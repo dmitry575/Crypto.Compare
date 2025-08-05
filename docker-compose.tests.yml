@@ -1,0 +1,68 @@
+version: '3.3'
+
+services:
+  api-public:
+    build:
+      context: .
+      dockerfile: sources/presentation/Crypto.Compare.PublicApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ConnectionStrings__PostgresConnection=User ID=postgres;Password=test;Host=sql;Port=5432;Database=sn_crypto.compare;Pooling=true;
+    ports:
+      - 18082:80
+    depends_on:
+      - sql
+  api-private:
+    build:
+      context: .
+      dockerfile: sources/presentation/Crypto.Compare.PrivateApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ConnectionStrings__PostgresConnection=User ID=postgres;Password=test;Host=sql;Port=5432;Database=sn_crypto.compare;Pooling=true;
+    ports:
+      - 18092:80
+    depends_on:
+      - sql
+  sql:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: test
+    volumes:
+      - db_volume_crypto.compare:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+    ports:
+      - 54323:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8098:8080
+
+  start_dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - sql
+      - adminer
+    command: sql:5432 adminer:8080 
+
+  start_app:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - api-public
+    command: api:80
+
+  tests:
+    environment:
+      - ApiEndpoints__PublicApiUri=http://api-crypto.compare
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ConnectionStrings__PostgresConnection=User ID=postgres;Password=test;Host=sql;Port=5432;Database=sn_crypto.compare;Pooling=true;
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+volumes:
+  db_volume_crypto.compare:
+    external: true
+   

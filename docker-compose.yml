@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  api-public:
+    restart: always
+    container_name: api_sncrypto.compare_1
+    build:
+      context: .
+      dockerfile: sources/presentation/Crypto.Compare.PublicApi/Dockerfile
+    image: api_sncrypto.compare
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ConnectionStrings__PostgresConnection=User ID=sn_crypto.compare_user;Password=wlk3!nd_3q;Host=database;Port=5432;Database=sn_crypto.compare;Pooling=true;
+      - ASPNETCORE_Logging__LogLevel__Default=Debug
+    ports:
+      - 127.0.0.1:8094:80
+    extra_hosts:
+      - "database:172.17.0.1"
+    network_mode: bridge
+
+  api-private:
+    restart: always
+    container_name: api_sncrypto.compare_1
+    build:
+      context: .
+      dockerfile: sources/presentation/Crypto.Compare.PrivateApi/Dockerfile
+    image: api_sncrypto.compare
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ConnectionStrings__PostgresConnection=User ID=sn_crypto.compare_user;Password=wlk3!nd_3q;Host=database;Port=5432;Database=sn_crypto.compare;Pooling=true;
+      - ASPNETCORE_Logging__LogLevel__Default=Debug
+    ports:
+      - 127.0.0.1:8094:80
+    extra_hosts:
+      - "database:172.17.0.1"
+    network_mode: bridge

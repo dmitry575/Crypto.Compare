@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="7.2.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.17" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+        <PackageReference Include="coverlet.collector" Version="6.0.4">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Moq" Version="4.20.72" />
+        <PackageReference Include="NUnit" Version="4.3.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\sources\core\Crypto.Compare.Services\Crypto.Compare.Services.csproj" />
+        <ProjectReference Include="..\..\sources\infrastructure\Crypto.Compare.DataAccess\Crypto.Compare.DataAccess.csproj" />
+		<ProjectReference Include="..\..\sources\presentation\Crypto.Compare.PrivateApi\Crypto.Compare.PrivateApi.csproj" />
+        <ProjectReference Include="..\..\sources\presentation\Crypto.Compare.PublicApi\Crypto.Compare.PublicApi.csproj" />
+    </ItemGroup>
+
+
+</Project>
