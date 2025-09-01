@@ -31,7 +31,7 @@ public class StoppingMiddleware
     }
 
     /// <summary>
-    /// Проверка, что приложение останавливается
+    ///     Проверка, что приложение останавливается
     /// </summary>
     private bool IsApplicationStopping(string path)
     {

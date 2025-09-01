@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using Microsoft.OpenApi.Models;
 using Crypto.Compare.PublicApi.Ioc;
 using Crypto.Compare.PublicApi.Middlewares;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using ApiRequestValidationFilter = Crypto.Compare.PublicApi.Filters.ApiRequestValidationFilter;
 
@@ -21,10 +21,7 @@ builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 builder.Logging.ClearProviders();
 builder.Logging.AddConfiguration(builder.Configuration);
 builder.Logging.AddLog4Net();
-if (builder.Environment.IsDevelopment())
-{
-    builder.Logging.AddConsole();
-}
+if (builder.Environment.IsDevelopment()) builder.Logging.AddConsole();
 
 
 // need to PostgresSQL for working DataTime 
@@ -45,7 +42,7 @@ builder.Services
         {
             Version = "v1",
             Title = "Api Crypto.Compare",
-            Description = "Web API for managing Crypto.Compare",
+            Description = "Web API for managing Crypto.Compare"
         });
 
         options.ExampleFilters();
@@ -63,7 +60,6 @@ builder.Services
         options.Filters.Add<ApiRequestValidationFilter>();
         options.EnableEndpointRouting = false;
     })
-
     .AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); })
     ;
 
@@ -82,10 +78,7 @@ if (app.Environment.IsDevelopment())
 
 var configuredOrigins = app.Configuration["Cors:AllowedOrigins"];
 var origins = Array.Empty<string>();
-if (!string.IsNullOrEmpty(configuredOrigins))
-{
-    origins = configuredOrigins.Split(',', ';').Select(i => i.Trim()).ToArray();
-}
+if (!string.IsNullOrEmpty(configuredOrigins)) origins = configuredOrigins.Split(',', ';').Select(i => i.Trim()).ToArray();
 
 app
     .UsePathBaseFromEnvironmentVariables()
@@ -96,7 +89,6 @@ app
         .AllowAnyHeader()
         .WithOrigins(origins).AllowAnyMethod().AllowAnyHeader().AllowCredentials()
     )
-
     .UseRouting()
     .UseAuthorization()
     .UseMiddleware<RequestIdLoggingMiddleware>()

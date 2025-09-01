@@ -6,22 +6,22 @@ using Newtonsoft.Json;
 namespace Crypto.Compare.PublicApi.Middlewares;
 
 /// <summary>
-/// Try handle exception from any controller
+///     Try handle exception from any controller
 /// </summary>
 public class UnhandledExceptionMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly ILogger<UnhandledExceptionMiddleware> _logger;
-    
+    private readonly RequestDelegate _next;
+
     /// <summary>
-    /// .Constr
+    ///     .Constr
     /// </summary>
     /// <param name="next">Next handler of request</param>
     /// <param name="logger">logger where write log</param>
     public UnhandledExceptionMiddleware(
         RequestDelegate next,
         ILogger<UnhandledExceptionMiddleware> logger
-        )
+    )
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));

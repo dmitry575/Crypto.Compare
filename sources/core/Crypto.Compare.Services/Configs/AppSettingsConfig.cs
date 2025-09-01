@@ -1,7 +1,7 @@
 namespace Crypto.Compare.Services.Configs;
 
 /// <summary>
-/// Application configuration
+///     Application configuration
 /// </summary>
 public class AppSettingsConfig
 {

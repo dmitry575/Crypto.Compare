@@ -1,16 +1,15 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-
 namespace Crypto.Compare.Services.Helpers;
 
 /// <summary>
-/// Code and decode authorization header 
+///     Code and decode authorization header
 /// </summary>
 public static class CoderTokenHelper
 {
     /// <summary>
-    /// Crypt data for token
+    ///     Crypt data for token
     /// </summary>
     /// <param name="data">Data in string</param>
     /// <param name="keyLength">Lenght of times hexs</param>
@@ -28,10 +27,7 @@ public static class CoderTokenHelper
         while (i > 0)
         {
             result[0] = key;
-            for (var k = 0; k < dataBytes.Length; k++)
-            {
-                result[1 + k] = (byte)(dataBytes[k] ^ key);
-            }
+            for (var k = 0; k < dataBytes.Length; k++) result[1 + k] = (byte)(dataBytes[k] ^ key);
 
             i--;
             key = result[1];
@@ -41,7 +37,7 @@ public static class CoderTokenHelper
     }
 
     /// <summary>
-    /// Decrypt data
+    ///     Decrypt data
     /// </summary>
     /// <param name="hexData">Crypted data</param>
     public static string DeCrypt(string hexData)
@@ -52,7 +48,7 @@ public static class CoderTokenHelper
     }
 
     /// <summary>
-    /// Decrypt data
+    ///     Decrypt data
     /// </summary>
     /// <param name="dataBytes">Crypted data</param>
     public static string DeCrypt(byte[] dataBytes)
@@ -64,10 +60,7 @@ public static class CoderTokenHelper
 
         while (i > 0)
         {
-            for (var k = 0; k < data.Length; k++)
-            {
-                data[k] = (byte)(dataBytes[k + 1] ^ key);
-            }
+            for (var k = 0; k < data.Length; k++) data[k] = (byte)(dataBytes[k + 1] ^ key);
 
             i--;
             key = data[1];
@@ -77,7 +70,7 @@ public static class CoderTokenHelper
     }
 
     /// <summary>
-    /// Get key for auth 2FA or 3FA
+    ///     Get key for auth 2FA or 3FA
     /// </summary>
     /// <param name="data">String with some data</param>
     public static string GetKeyAuthFa(string data)
@@ -89,7 +82,7 @@ public static class CoderTokenHelper
     }
 
     /// <summary>
-    /// Get key for changes (recovery for example) (old name - sk)
+    ///     Get key for changes (recovery for example) (old name - sk)
     /// </summary>
     /// <param name="data">String with some data</param>
     public static string GetSk(string data)
@@ -101,7 +94,7 @@ public static class CoderTokenHelper
     }
 
     /// <summary>
-    /// Get hash with sign 
+    ///     Get hash with sign
     /// </summary>
     /// <param name="data">Data to hash</param>
     /// <param name="key">Salt hashing</param>
@@ -112,13 +105,13 @@ public static class CoderTokenHelper
 
         var hashBytes = hash.ComputeHash(buffer);
 
-#pragma warning disable CA1311 
+#pragma warning disable CA1311
         return Convert.ToHexString(hashBytes)
             .ToLower();
-#pragma warning restore CA1311 
+#pragma warning restore CA1311
     }
 
-  
+
     public static byte[] GetByteFromInt(int intValue)
     {
         var intBytes = BitConverter.GetBytes(intValue);

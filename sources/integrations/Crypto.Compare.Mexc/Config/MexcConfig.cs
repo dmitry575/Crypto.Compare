@@ -3,17 +3,17 @@
 namespace Crypto.Compare.Mexc.Config;
 
 /// <summary>
-/// Configuration of Mexc Crypto Market
+///     Configuration of Mexc Crypto Market
 /// </summary>
 public class MexcConfig : BaseConfig
 {
     /// <summary>
-    /// Access key for market
+    ///     Access key for market
     /// </summary>
     public string AccessKey { get; set; } = null!;
 
     /// <summary>
-    /// Secret key for signe request
+    ///     Secret key for signe request
     /// </summary>
     public string SecretKey { get; set; } = null!;
 

@@ -4,12 +4,12 @@ using Microsoft.Extensions.Primitives;
 namespace Crypto.Compare.PublicApi.Middlewares;
 
 /// <summary>
-/// Set request id to all requests
+///     Set request id to all requests
 /// </summary>
 public class RequestIdLoggingMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly ILogger<RequestIdLoggingMiddleware> _logger;
+    private readonly RequestDelegate _next;
 
     public RequestIdLoggingMiddleware(RequestDelegate next, ILogger<RequestIdLoggingMiddleware> logger)
     {
@@ -20,18 +20,13 @@ public class RequestIdLoggingMiddleware
     public async Task Invoke(HttpContext context)
     {
         string str = context.Request.Headers[LogConstants.XRequestId].ToString();
-        if (string.IsNullOrEmpty(str))
-        {
-            str = Guid.NewGuid().ToString();
-        }
+        if (string.IsNullOrEmpty(str)) str = Guid.NewGuid().ToString();
 
         using (_logger.BeginScope(str))
         {
             if (context.Response != null && context.Response.Headers != null &&
                 !context.Response.Headers.ContainsKey(LogConstants.XRequestId))
-            {
                 context.Response.Headers.Add(new KeyValuePair<string, StringValues>(LogConstants.XRequestId, (StringValues)str));
-            }
 
             await _next(context);
         }

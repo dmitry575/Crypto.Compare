@@ -10,24 +10,22 @@ public static class BaseApiResponseExtensions
     {
         if (response.HasError)
         {
-            switch (response.ErrorCode)
+            return response.ErrorCode switch
             {
-                case (int)SystemErrorCodes.NotFound:
-                    return new NotFoundObjectResult(response);
-                default:
-                    return new BadRequestObjectResult(response);
-            }
+                (int)SystemErrorCodes.NotFound => new NotFoundObjectResult(response),
+                _ => new BadRequestObjectResult(response)
+            };
         }
 
-        if (statusCodes != null)
+        if (statusCodes == null)
         {
-            switch (statusCodes.Value)
-            {
-                case 400:
-                    return new UnauthorizedObjectResult(response);
-            }
+            return new OkObjectResult(response);
         }
 
-        return new OkObjectResult(response);
+        return statusCodes.Value switch
+        {
+            400 => new UnauthorizedObjectResult(response),
+            _ => new OkObjectResult(response)
+        };
     }
 }

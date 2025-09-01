@@ -4,7 +4,7 @@ using log4net;
 
 namespace Crypto.Compare.PublicApi.Middlewares;
 
-public class UserIdLoggingMiddleware
+public sealed class UserIdLoggingMiddleware
 {
     private readonly RequestDelegate _next;
 
@@ -16,10 +16,7 @@ public class UserIdLoggingMiddleware
     public Task InvokeAsync(HttpContext context)
     {
         var userId = context.User.UserId();
-        if (!userId.HasValue)
-        {
-            return _next(context);
-        }
+        if (!userId.HasValue) return _next(context);
 
         using (LogicalThreadContext.Stacks[LogConstants.NDCPropertyName].Push(userId.ToString()))
         {

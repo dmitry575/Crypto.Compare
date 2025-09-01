@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Crypto.Compare.PublicApi.Extensions;
 
 /// <summary>
-/// Extensions for api result
+///     Extensions for api result
 /// </summary>
 public static class ApiResponseExtensions
 {
@@ -18,7 +18,7 @@ public static class ApiResponseExtensions
     {
         return cqrsRequest.IsSuccess ? responseMapper(cqrsRequest).ToObjectResult() : cqrsRequest.ToApiErrorResult();
     }
-    
+
     public static IActionResult ToApiResult<TEntity>(this Result<TEntity> result)
     {
         return result.IsSuccess ? new BaseApiResponse().ToObjectResult() : result.ToApiErrorResult();
@@ -49,13 +49,9 @@ public static class ApiResponseExtensions
         foreach (var error in result.Errors)
         {
             if (error is ApplicationError applicationError)
-            {
                 response.AddErrorMsg(applicationError.ErrorCode, error.Message);
-            }
             else
-            {
                 response.AddErrorMsg((int)SystemErrorCodes.InvalidRequest, error.Message);
-            }
         }
 
         return response;

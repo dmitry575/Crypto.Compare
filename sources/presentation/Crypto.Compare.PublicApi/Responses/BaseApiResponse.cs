@@ -3,26 +3,25 @@
 namespace Crypto.Compare.PublicApi.Responses;
 
 /// <summary>
-/// Base class of API response
+///     Base class of API response
 /// </summary>
 [Serializable]
 public class BaseApiResponse
 {
-    public BaseApiResponse() => ErrorMsgs = new List<string>();
+    public BaseApiResponse()
+    {
+        ErrorMsgs = new List<string>();
+    }
 
     public int ErrorCode { get; set; }
 
     public IList<string> ErrorMsgs { get; set; }
 
-    [JsonIgnore]
-    public virtual bool HasError => ErrorMsgs.Any() && ErrorCode != 0;
+    [JsonIgnore] public virtual bool HasError => ErrorMsgs.Any() && ErrorCode != 0;
 
     public void AddErrorMsg(string msg)
     {
-        if (ErrorMsgs == null)
-        {
-            ErrorMsgs = new List<string>();
-        }
+        if (ErrorMsgs == null) ErrorMsgs = new List<string>();
 
         ErrorMsgs.Add(msg);
     }
@@ -40,5 +39,8 @@ public class BaseApiResponse
         return this;
     }
 
-    public override string ToString() => $"Code: {ErrorCode}, message: {string.Join(",", ErrorMsgs)}";
+    public override string ToString()
+    {
+        return $"Code: {ErrorCode}, message: {string.Join(",", ErrorMsgs)}";
+    }
 }

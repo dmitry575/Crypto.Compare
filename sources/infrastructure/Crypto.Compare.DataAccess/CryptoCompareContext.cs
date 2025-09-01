@@ -1,25 +1,25 @@
 ﻿using Crypto.Compare.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Crypto.Compare.DataAccess
+namespace Crypto.Compare.DataAccess;
+
+public class CryptoCompareContext : DbContext
 {
-    public class CryptoCompareContext : DbContext
+    public CryptoCompareContext(DbContextOptions<CryptoCompareContext> options)
+        : base(options)
     {
-        public DbSet<SymbolProvider> SymbolProviders { get; set; }
-        public CryptoCompareContext(DbContextOptions<CryptoCompareContext> options)
-            : base(options)
-        {
-        }
+    }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.EnableDetailedErrors();
-            base.OnConfiguring(optionsBuilder);
-        }
+    public DbSet<SymbolProvider> SymbolProviders { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.EnableDetailedErrors();
+        base.OnConfiguring(optionsBuilder);
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
     }
 }

@@ -1,15 +1,15 @@
 ﻿namespace Crypto.Compare.PublicApi.Middlewares;
 
 /// <summary>
-/// Listen events for abort
+///     Listen events for abort
 /// </summary>
-public class AbortRequestMiddleware
+public sealed class AbortRequestMiddleware
 {
+    private readonly IHostApplicationLifetime _applicationLifetime;
     private readonly ILogger<AbortRequestMiddleware> _logger;
     private readonly RequestDelegate _next;
-    private readonly IHostApplicationLifetime _applicationLifetime;
 
-    public AbortRequestMiddleware(RequestDelegate next, 
+    public AbortRequestMiddleware(RequestDelegate next,
         IHostApplicationLifetime applicationLifetime,
         ILogger<AbortRequestMiddleware> logger)
     {
@@ -27,9 +27,9 @@ public class AbortRequestMiddleware
             await _next.Invoke(context);
         }
     }
-    
+
     /// <summary>
-    /// Aborted request and logged information into log
+    ///     Aborted request and logged information into log
     /// </summary>
     private void AbortRequest(object? context)
     {
@@ -46,7 +46,7 @@ public class AbortRequestMiddleware
     }
 
     /// <summary>
-    /// Get first signal
+    ///     Get first signal
     /// </summary>
     private void StoppingRequest(object? context)
     {

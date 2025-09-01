@@ -18,15 +18,9 @@ public class ResponseMapper : IResponseMapper
     public IActionResult ToCustomResponse<TResponse, TEntity>(Result<TEntity>? result)
         where TResponse : BaseApiResponse, new()
     {
-        if (result == null)
-        {
-            return null;
-        }
+        if (result == null) return null;
 
-        if (result.IsSuccess)
-        {
-            return _automapper.Map<TResponse>(result.Value).ToObjectResult();
-        }
+        if (result.IsSuccess) return _automapper.Map<TResponse>(result.Value).ToObjectResult();
 
         return result.ToApiErrorResult();
     }

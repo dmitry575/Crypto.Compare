@@ -4,9 +4,9 @@ using FluentResults;
 namespace Crypto.Compare.Common.Errors;
 
 /// <summary>
-/// Error with error code
+///     Error with error code
 /// </summary>
-public class ApplicationError: Error
+public class ApplicationError : Error
 {
     public ApplicationError(Enum errorCode, string errorMessage)
         : base(errorMessage)

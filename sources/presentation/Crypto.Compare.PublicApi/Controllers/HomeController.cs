@@ -6,7 +6,7 @@ namespace Crypto.Compare.PublicApi.Controllers;
 public class HomeController : ControllerBase
 {
     /// <summary>
-    /// Main page
+    ///     Main page
     /// </summary>
     [HttpGet("")]
     public ActionResult Index()

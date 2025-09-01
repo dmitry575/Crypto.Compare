@@ -18,13 +18,17 @@ public static class ServicesRegistry
     }
 
     private static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)
-        => services
+    {
+        return services
             .Configure<AppSettingsConfig>(configuration.GetSection("AppSettings").Bind);
+    }
 
     private static IServiceCollection AddSingletons(this IServiceCollection services)
-        => services
+    {
+        return services
             .AddSingleton<IResponseMapper, ResponseMapper>()
             .AddSingleton(_ => new MapperConfiguration(cfg => { cfg.AddProfile<AutoMapperProfile>(); }).CreateMapper());
+    }
 
 
     private static IServiceCollection AddExternalServices(this IServiceCollection services)
@@ -33,7 +37,9 @@ public static class ServicesRegistry
     }
 
     private static IServiceCollection AddMediator(this IServiceCollection services)
-        => services
+    {
+        return services
             .AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(Assembly.GetCallingAssembly()));
+    }
 }

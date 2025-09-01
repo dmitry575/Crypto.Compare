@@ -8,5 +8,4 @@ public class SymbolProvider
     public decimal PriceSell { get; set; }
     public decimal PriceBuy { get; set; }
     public DateTime UpdatedAt { get; set; }
-
 }

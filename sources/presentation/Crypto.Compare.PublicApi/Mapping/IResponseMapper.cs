@@ -7,10 +7,9 @@ namespace Crypto.Compare.PublicApi.Mapping;
 public interface IResponseMapper
 {
     /// <summary>
-    /// Mapper from results to response
+    ///     Mapper from results to response
     /// </summary>
     /// <returns></returns>
     IActionResult ToCustomResponse<TResponse, TEntity>(Result<TEntity> result)
         where TResponse : BaseApiResponse, new();
-
 }

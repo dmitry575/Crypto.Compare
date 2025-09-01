@@ -13,5 +13,4 @@ public static class ResultExtensions
     {
         return request.Errors.GetErrorFormatted();
     }
-
 }

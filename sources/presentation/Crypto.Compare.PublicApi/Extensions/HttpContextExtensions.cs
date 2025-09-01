@@ -6,16 +6,13 @@ namespace Crypto.Compare.PublicApi.Extensions;
 public static class HttpContextExtensions
 {
     /// <summary>
-    /// Get real ip address client
+    ///     Get real ip address client
     /// </summary>
     /// <param name="context">HTTP context</param>
     /// <param name="mapToIPv4">Mapping ip address to IPv4</param>
     public static string GetRealIp(this HttpContext context, bool mapToIPv4 = true)
     {
-        if (context == null)
-        {
-            return string.Empty;
-        }
+        if (context == null) return string.Empty;
 
         return context.Request?.Headers["X-Forwarded-For"].FirstOrDefault() ?? (mapToIPv4
             ? context.Connection?.RemoteIpAddress?.MapToIPv4().ToString()

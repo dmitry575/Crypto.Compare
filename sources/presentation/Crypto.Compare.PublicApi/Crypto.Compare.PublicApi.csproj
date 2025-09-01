@@ -1,52 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<FileVersion>1.0.100</FileVersion>
-		<GenerateAssemblyFileVersionAttribute>true</GenerateAssemblyFileVersionAttribute>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <FileVersion>1.0.100</FileVersion>
+        <GenerateAssemblyFileVersionAttribute>true</GenerateAssemblyFileVersionAttribute>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="AutoMapper" Version="14.0.0" />
-		<PackageReference Include="MediatR" Version="12.5.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-		<PackageReference Include="FluentResults" Version="3.16.0" />
-		<PackageReference Include="FluentValidation" Version="12.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.4" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.3" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Filters.Abstractions" Version="8.0.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.17" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.17" />
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
-		<PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.2.1" />
-		
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="14.0.0"/>
+        <PackageReference Include="MediatR" Version="12.5.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0"/>
+        <PackageReference Include="FluentResults" Version="4.0.0"/>
+        <PackageReference Include="FluentValidation" Version="12.0.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.4"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.3"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters.Abstractions" Version="8.0.3"/>
+        <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.2.1"/>
+    </ItemGroup>
 
-	</ItemGroup>
+    <ItemGroup>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="..\.dockerignore">
-			<Link>.dockerignore</Link>
-		</Content>
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\core\Crypto.Compare.Services\Crypto.Compare.Services.csproj"/>
+        <ProjectReference Include="..\..\infrastructure\Crypto.Compare.DataAccess\Crypto.Compare.DataAccess.csproj"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\core\Crypto.Compare.Services\Crypto.Compare.Services.csproj" />
-		<ProjectReference Include="..\..\infrastructure\Crypto.Compare.DataAccess\Crypto.Compare.DataAccess.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Dtos\" />
-		<Folder Include="Requests\" />
-		<Folder Include="Responses\" />
-	</ItemGroup>
+    <ItemGroup>
+        <Folder Include="Dtos\"/>
+        <Folder Include="Requests\"/>
+        <Folder Include="Responses\"/>
+    </ItemGroup>
 
 </Project>

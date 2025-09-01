@@ -5,16 +5,16 @@ using Microsoft.IO;
 namespace Crypto.Compare.PublicApi.Middlewares;
 
 /// <summary>
-/// Logging of requests
-/// https://github.com/elanderson/ASP.NET-Core-Basics-Refresh/blob/master/src/ContactsApi/Middleware/RequestResponseLoggingMiddleware.cs
+///     Logging of requests
+///     https://github.com/elanderson/ASP.NET-Core-Basics-Refresh/blob/master/src/ContactsApi/Middleware/RequestResponseLoggingMiddleware.cs
 /// </summary>
 public class RequestResponseLoggingMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly ILogger<RequestResponseLoggingMiddleware> _logger;
-    private readonly RecyclableMemoryStreamManager _recyclableMemoryStreamManager;
+    private readonly RequestDelegate _next;
 
     private readonly RequestResponseLoggingMiddlewareOptions _options;
+    private readonly RecyclableMemoryStreamManager _recyclableMemoryStreamManager;
 
     public RequestResponseLoggingMiddleware(RequestDelegate next,
         ILogger<RequestResponseLoggingMiddleware> logger,
@@ -28,19 +28,12 @@ public class RequestResponseLoggingMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        if (_options.EnableRequestLogging)
-        {
-            await LogRequest(context);
-        }
+        if (_options.EnableRequestLogging) await LogRequest(context);
 
         if (_options.EnableResponseLogging)
-        {
             await LogResponseAsync(context);
-        }
         else
-        {
             await _next(context);
-        }
     }
 
     private async Task LogRequest(HttpContext context)

@@ -6,9 +6,11 @@ namespace Crypto.Compare.PublicApi.Swaggers.Responses;
 public class Get400Example : IExamplesProvider<BaseApiResponse>
 {
     public BaseApiResponse GetExamples()
-        => new BaseApiResponse
+    {
+        return new BaseApiResponse()
         {
             ErrorCode = -2,
             ErrorMsgs = new List<string> { "Invalid request" }
         };
+    }
 }

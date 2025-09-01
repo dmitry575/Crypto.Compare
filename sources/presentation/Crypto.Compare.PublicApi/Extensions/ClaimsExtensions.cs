@@ -9,6 +9,8 @@ public static class ClaimsExtensions
         return !long.TryParse(identity.GetClaim("user_id")?.Value, out var result) ? new long?() : result;
     }
 
-    public static Claim? GetClaim(this ClaimsPrincipal identity, string claimName) =>
-        identity.Claims.FirstOrDefault<Claim>((Func<Claim?, bool>)(c => c?.Type == claimName));
+    public static Claim? GetClaim(this ClaimsPrincipal identity, string claimName)
+    {
+        return identity.Claims.FirstOrDefault<Claim>((Func<Claim?, bool>)(c => c?.Type == claimName));
+    }
 }

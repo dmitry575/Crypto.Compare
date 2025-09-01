@@ -23,9 +23,6 @@
     <ItemGroup>
         <ProjectReference Include="..\..\sources\core\Crypto.Compare.Services\Crypto.Compare.Services.csproj" />
         <ProjectReference Include="..\..\sources\infrastructure\Crypto.Compare.DataAccess\Crypto.Compare.DataAccess.csproj" />
-		<ProjectReference Include="..\..\sources\presentation\Crypto.Compare.PrivateApi\Crypto.Compare.PrivateApi.csproj" />
-        <ProjectReference Include="..\..\sources\presentation\Crypto.Compare.PublicApi\Crypto.Compare.PublicApi.csproj" />
     </ItemGroup>
-
 
 </Project>

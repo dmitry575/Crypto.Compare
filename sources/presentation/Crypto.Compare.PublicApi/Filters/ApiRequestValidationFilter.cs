@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace Crypto.Compare.PublicApi.Filters;
 
 /// <summary>
-/// Filter of validation response
+///     Filter of validation response
 /// </summary>
 public class ApiRequestValidationFilter : IActionFilter
 {
-
     public void OnActionExecuting(ActionExecutingContext context)
     {
         var actionArguments = context.ActionArguments;
@@ -26,17 +25,18 @@ public class ApiRequestValidationFilter : IActionFilter
             }
         }
 
-        if (context.ModelState.IsValid)
-        {
-            return;
-        }
+        if (context.ModelState.IsValid) return;
 
         var response = CreateBaseApiResponse(context);
         context.Result = response.ToObjectResult();
     }
 
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+    }
+
     /// <summary>
-    /// Create response with error
+    ///     Create response with error
     /// </summary>
     private BaseApiResponse CreateBaseApiResponse(ActionContext actionContext)
     {
@@ -48,19 +48,11 @@ public class ApiRequestValidationFilter : IActionFilter
         foreach (var modelError in actionContext.ModelState.Values.SelectMany(e => e.Errors))
         {
             var msg = modelError.ErrorMessage;
-            if (string.IsNullOrWhiteSpace(msg))
-            {
-                msg = "Invalid request.";
-            }
+            if (string.IsNullOrWhiteSpace(msg)) msg = "Invalid request.";
 
             response.AddErrorMsg(response.ErrorCode, msg);
         }
 
         return response;
-    }
-
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-
     }
 }
