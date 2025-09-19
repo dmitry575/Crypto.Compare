@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Reflection;
+using System.Text.Json.Serialization;
 using Crypto.Compare.PublicApi.Ioc;
 using Crypto.Compare.PublicApi.Middlewares;
 using Microsoft.OpenApi.Models;
@@ -21,7 +22,10 @@ builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 builder.Logging.ClearProviders();
 builder.Logging.AddConfiguration(builder.Configuration);
 builder.Logging.AddLog4Net();
-if (builder.Environment.IsDevelopment()) builder.Logging.AddConsole();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Logging.AddConsole();
+}
 
 
 // need to PostgresSQL for working DataTime 
@@ -49,6 +53,14 @@ builder.Services
         options.EnableAnnotations();
         options.DescribeAllParametersInCamelCase();
         options.UseInlineDefinitionsForEnums();
+
+        // Set the comments path for the Swagger JSON and UI.
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        if (File.Exists(xmlPath))
+        {
+            options.IncludeXmlComments(xmlPath);
+        }
     });
 
 builder.Services.AddSwaggerExamplesFromAssemblyOf(typeof(Program));

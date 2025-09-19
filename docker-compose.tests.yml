@@ -9,7 +9,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_ConnectionStrings__PostgresConnection=User ID=postgres;Password=test;Host=sql;Port=5432;Database=sn_crypto.compare;Pooling=true;
     ports:
-      - 18082:80
+      - 18072:80
     depends_on:
       - sql
   api-private:
@@ -20,7 +20,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_ConnectionStrings__PostgresConnection=User ID=postgres;Password=test;Host=sql;Port=5432;Database=sn_crypto.compare;Pooling=true;
     ports:
-      - 18092:80
+      - 18072:80
     depends_on:
       - sql
   sql:
@@ -32,13 +32,13 @@ services:
       - db_volume_crypto.compare:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d
     ports:
-      - 54323:5432
+      - 54373:5432
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8098:8080
+      - 8078:8080
 
   start_dependencies:
     image: dadarek/wait-for-dependencies
