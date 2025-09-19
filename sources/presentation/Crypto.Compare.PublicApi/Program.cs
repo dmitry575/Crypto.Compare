@@ -38,6 +38,7 @@ builder.Services
     .AddServices(builder.Configuration)
     .AddDatabase(builder.Configuration)
     .AddMemoryCache()
+    
     ;
 builder.Services
     .AddSwaggerGen(options =>

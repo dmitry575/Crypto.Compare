@@ -35,6 +35,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\core\Crypto.Compare.Services\Crypto.Compare.Services.csproj"/>
         <ProjectReference Include="..\..\infrastructure\Crypto.Compare.DataAccess\Crypto.Compare.DataAccess.csproj"/>
+        <ProjectReference Include="..\..\integrations\Crypto.Compare.Mexc\Crypto.Compare.Mexc.csproj" />
     </ItemGroup>
 
     <ItemGroup>

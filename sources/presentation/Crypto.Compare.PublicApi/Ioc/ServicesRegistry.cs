@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using AutoMapper;
+using Crypto.Compare.Mexc.Config;
 using Crypto.Compare.PublicApi.Mapping;
 using Crypto.Compare.Services.Configs;
 
@@ -14,6 +15,7 @@ public static class ServicesRegistry
                 .AddMediator()
                 .AddSingletons()
                 .AddExternalServices()
+                .AddAdapters(configuration)
             ;
     }
 
@@ -23,6 +25,13 @@ public static class ServicesRegistry
             .Configure<AppSettingsConfig>(configuration.GetSection("AppSettings").Bind);
     }
 
+    private static IServiceCollection AddAdapters(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<MexcConfig>(configuration.GetSection("MexcConfig").Bind);
+
+        return services;
+    }
+    
     private static IServiceCollection AddSingletons(this IServiceCollection services)
     {
         return services

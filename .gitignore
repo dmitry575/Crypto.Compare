@@ -253,6 +253,4 @@ logs
 **/obj
 **/bin
 *.cache
-sources/infrastructure/Vault.DataAccess/obj/Debug/
-sources/core/Vault.Data/obj/Debug/*
-sources/infrastructure/Vault.DataAccess/obj/
+sources/presentation/Crypto.Compare.PublicApi/Properties/launchSettings.json
